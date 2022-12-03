@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 @Component
@@ -26,9 +28,19 @@ public class postgresSQLRunner implements ApplicationRunner {
             System.out.println(connection.getMetaData().getUserName());
 
             Statement statement = connection.createStatement();
-            jdbcTemplate.execute("INSERT INTO user_info (user_id, user_name, password,mobile_number) values " +
-                    "('whitedevloper', '김재성','1234','01023017923')");
-        }
 
+            ResultSet rs = statement.executeQuery("SELECT * FROM user_info");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            System.out.println("querying SELECT * FROM user_info");
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    if (i > 1) System.out.print(",  ");
+                    String columnValue = rs.getString(i);
+                    System.out.print(rsmd.getColumnName(i)+":"+columnValue);
+                }
+                System.out.println("");
+            }
+        }
     }
 }

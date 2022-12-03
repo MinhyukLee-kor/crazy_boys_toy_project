@@ -1,31 +1,23 @@
 package com.example.crazyProject.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class User {
     private Integer id;
     private String user_id;
     private String user_name;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
+    private String password;
+    private String user_uuid;
+    private String mobile_number;
+    private String birth;
+    private String zipcode;
+    private String address;
+    private String address_detail;
+    private String access_ip;
+    private String use_yn;
+    private String regist_date;
+    private String modify_date;
 }

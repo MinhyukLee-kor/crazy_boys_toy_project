@@ -22,7 +22,7 @@ public class TestController {
     }
 
     @PostMapping(value = "/postHello")
-    public String postHello(@RequestBody HashMap<String, Object> obj){
+    public String postHello(@RequestBody Object obj){
         System.out.println("obj = " + obj);
         return "포스트발!!!";
     }

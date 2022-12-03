@@ -1,12 +1,15 @@
 package com.example.crazyProject.controller;
 
+import com.example.crazyProject.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
 @RequestMapping(value="/api")
 public class TestController {
-
+    @Autowired
+    TestService testService;
     @GetMapping(value = "/test")
     public String test(){
         return "index.html";
@@ -22,5 +25,12 @@ public class TestController {
     public String postHello(@RequestBody HashMap<String, Object> obj){
         System.out.println("obj = " + obj);
         return "포스트발!!!";
+    }
+
+    @PostMapping(value = "/postQuerry")
+    public String postHello(@RequestBody String querry){
+        String result = testService.selectQuerry(querry);
+        System.out.println(result);
+        return "조회성공";
     }
 }

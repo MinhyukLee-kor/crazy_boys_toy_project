@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Closure연습</title>
+</head>
+<body>
+<h1>클로저이용, 전역변수 안쓰기</h1>
+<div>
+  <label>값
+  <input id="number" type="number" disabled />
+  </label>
+  <button onclick="plusCnt();">+</button>
+  <button onclick="minusCnt();">-</button>
+</div>
+</body>
+<script type="text/javascript">
+  const closure = () => {
+    let cnt = 0;
+    const plus = () =>{
+      return cnt = cnt + 1;
+    };
+    const minus = () => {
+      return cnt = cnt -1;
+    };
+    return {
+      plus,
+      minus
+    }
+  }
+
+  let testClosure = closure();
+  const plusCnt = () => {
+    document.getElementById('number').value = testClosure.plus();
+  }
+  const minusCnt = () => {
+    document.getElementById('number').value = testClosure.minus();
+  }
+
+
+</script>
+</html>

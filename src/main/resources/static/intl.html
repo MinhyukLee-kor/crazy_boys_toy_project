@@ -4,8 +4,56 @@
     <meta charset="UTF-8">
     <title>Intl연습</title>
 </head>
+<style>
+    .inputBox{
+        width : 100px;
+    }
+</style>
 <body>
   <h1> 콘솔 창을 확인 해주세요</h1>
+
+<div>
+    <h1>날짜 표시</h1>
+    <label>이름
+        <input name="name" id="name"/>
+    </label>
+    <br>
+    <label>생년월일
+        <input class="inputBox" name="year" id="year" placeholder="(ex)1993"/><sapn> 년</sapn>
+        <input class="inputBox" name="year" id="month" placeholder="(ex)2"/><span> 월</span>
+        <input class="inputBox" name="year" id="day" placeholder="(ex)1"/><span> 일</span>
+    </label>
+    <br>
+    <button onclick="fnSubmit()">날짜 계산</button>
+    <br>
+    <div>
+        <label for="result">결과 : </label><input style="width: 300px" id="result" disabled/>
+    </div>
+</div>
+
+<div>
+    <h1>가격 표시</h1>
+    <label> 가격 (원)
+        <input name="price" id="price"/>
+    </label>
+    <br>
+    <button onclick="fnSubmit2()">가격 계산</button><br>
+    <label> 가격 (원)
+        <input class="inputBox" name="priceKoLong" id="priceKoLong" disabled />
+    </label>
+    <br>
+    <label> 가격 (원)
+        <input class="inputBox" name="priceKoShort" id="priceKoShort" disabled />
+    </label>
+    <br>
+    <label> 가격 ($)
+        <input class="inputBox" name="priceUsLong" id="priceUsLong" disabled />
+    </label>
+    <br>
+    <label> 가격 ($)
+        <input class="inputBox" name="priceUsShort" id="priceUsShort" disabled />
+    </label>
+</div>
 </body>
 <script type="text/javascript">
   //단순 숫자 표시
@@ -91,5 +139,51 @@
       weekday : 'long'  //short
   }));  // 1993년 2월 1일 월요일 오전 12:00
 
+  const fnSubmit = () => {
+      let name = document.getElementById('name').value;
+      let year = document.getElementById('year').value-1;
+      let month = document.getElementById('month').value;
+      let day = document.getElementById('day').value;
+      let birthDay = new Date(year, month, day);
+      let today = new Date();
+      let days = Math.ceil((birthDay-today)/(1000*60*60*24));
+      let format = new Intl.RelativeTimeFormat(navigator.language,{numeric:'auto'});
+      document.getElementById('result').value = `${name} 님이 태어난 일 : ${format.format(days, 'day')}`;
+  }
+
+  const fnSubmit2 = () => {
+      let price = document.getElementById('price').value;
+
+      const koLong = new Intl.NumberFormat('ko',{
+          style : 'currency', //화폐
+          currency : 'krw',  //한화
+      });
+      const priceKoLong = koLong.format(price);
+
+      const koShort = new Intl.NumberFormat('ko',{
+          style : 'currency', //화폐
+          currency : 'krw',  //한화
+          notation : 'compact'
+      });
+      const priceKoShort = koLong.format(price);
+
+      const usLong = new Intl.NumberFormat('en-Us',{
+          style : 'currency', //화폐
+          currency : 'usd',  //한화
+      });
+      const priceUsLong = usLong.format(price);
+
+      const usShort = new Intl.NumberFormat('en-Us',{
+          style : 'currency', //화폐
+          currency : 'usd',  //한화
+          notation: 'compact'
+      });
+      const priceUsShort = usShort.format(price);
+
+      document.getElementById('priceKoLong').value = priceKoLong;
+      document.getElementById('priceKoShort').value = priceKoShort;
+      document.getElementById('priceUsLong').value = priceUsLong;
+      document.getElementById('priceUsShort').value = priceUsShort;
+  }
 </script>
 </html>

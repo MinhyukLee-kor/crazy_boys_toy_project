@@ -14,4 +14,6 @@ public interface UserMapper {
 
     public int signUp(User user);
 
+    public HashMap<String, Object> signIn(String userId);
+
 }

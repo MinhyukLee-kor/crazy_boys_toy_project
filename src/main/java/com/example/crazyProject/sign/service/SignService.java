@@ -8,7 +8,7 @@ public interface SignService {
     public int idCheck(String userId);
     public int signUp(User user);
 
-    public int login(String userId, String password);
+    public int signIn(String userId, String password);
 
     public void logout();
 

@@ -41,4 +41,17 @@
          now()
         )
     </insert>
+
+    <select id="signIn" resultType="HashMap">
+        SELECT id,
+               user_id,
+               password,
+               mobile_number,
+               birth,
+               zipcode,
+               address,
+               address_detail
+        FROM user_info
+        WHERE user_id = #{user_id}
+    </select>
 </mapper>

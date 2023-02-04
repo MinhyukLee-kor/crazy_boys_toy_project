@@ -27,4 +27,16 @@ public class SignController {
     public int signUp(@RequestBody User user) {
         return signService.signUp(user);
     }
+
+    @RequestMapping(value = "signIn", method = RequestMethod.POST)
+    public String signIn(@RequestBody User user) {
+        String userId = user.getUser_id();
+        String password = user.getPassword();
+        int result = signService.signIn(userId, password);
+        if(result == 1) {
+            return "로그인 성공";
+        } else {
+            return "로그인 실패";
+        }
+    }
 }

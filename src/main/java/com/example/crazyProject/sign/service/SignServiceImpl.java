@@ -39,9 +39,13 @@ public class SignServiceImpl implements SignService{
 
     /** 로그인 */
     @Override
-    public int login(String userId, String password) {
+    public int signIn(String userId, String password) {
         int result = 0;
-
+        HashMap<String, Object> resMap = userMapper.signIn(userId);
+        String realPw = (String)resMap.get("password");
+        if(realPw.equals(password)){
+            result = 1;
+        }
         return result;
     }
 

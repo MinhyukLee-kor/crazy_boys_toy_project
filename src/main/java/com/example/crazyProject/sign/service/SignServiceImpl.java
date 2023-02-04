@@ -4,6 +4,7 @@ import com.example.crazyProject.mapper.sign.UserMapper;
 import com.example.crazyProject.sign.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 
@@ -28,9 +29,11 @@ public class SignServiceImpl implements SignService{
     }
 
     /** 회원가입 */
+    @Transactional
     @Override
     public int signUp(User user) {
         int result = 0;
+        result = userMapper.signUp(user);
         return result;
     }
 

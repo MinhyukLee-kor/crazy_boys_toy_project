@@ -1,5 +1,6 @@
 package com.example.crazyProject.sign.controller;
 
+import com.example.crazyProject.sign.domain.User;
 import com.example.crazyProject.sign.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,5 +21,10 @@ public class SignController {
     @RequestMapping(value = "idCheck", method = RequestMethod.POST)
     public int idCheck(@RequestBody String userId) {
         return signService.idCheck(userId);
+    }
+
+    @RequestMapping(value = "signUp", method = RequestMethod.POST)
+    public int signUp(@RequestBody User user) {
+        return signService.signUp(user);
     }
 }

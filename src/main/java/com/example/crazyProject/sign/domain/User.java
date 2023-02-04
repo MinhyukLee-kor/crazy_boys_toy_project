@@ -10,7 +10,6 @@ public class User {
     private String user_id;
     private String user_name;
     private String password;
-    private String user_uuid;
     private String mobile_number;
     private String birth;
     private String zipcode;

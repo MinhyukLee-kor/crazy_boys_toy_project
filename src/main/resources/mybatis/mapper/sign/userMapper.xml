@@ -9,4 +9,36 @@
         AND user_id = #{userId}
     </select>
 
+    <insert id="signUp" parameterType="com.example.crazyProject.sign.domain.User">
+        INSERT INTO user_info
+        (
+         user_id,
+         user_name,
+         password,
+         mobile_number,
+         birth,
+         zipcode,
+         address,
+         address_detail,
+         access_ip,
+         use_yn,
+         register_date,
+         modify_date
+         )
+        VALUES
+        (
+         #{user_id},
+         #{user_name},
+         #{password},
+         #{mobile_number},
+         #{birth},
+         #{zipcode},
+         #{address},
+         #{address_detail},
+         #{access_ip},
+         true,
+         now(),
+         now()
+        )
+    </insert>
 </mapper>

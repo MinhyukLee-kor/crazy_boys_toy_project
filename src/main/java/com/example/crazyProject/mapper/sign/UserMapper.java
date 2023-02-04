@@ -1,5 +1,6 @@
 package com.example.crazyProject.mapper.sign;
 
+import com.example.crazyProject.sign.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +10,8 @@ import java.util.HashMap;
 @Repository
 public interface UserMapper {
 
-    HashMap<String,Object> idCheck(String userId);
+    public HashMap<String,Object> idCheck(String userId);
+
+    public int signUp(User user);
+
 }

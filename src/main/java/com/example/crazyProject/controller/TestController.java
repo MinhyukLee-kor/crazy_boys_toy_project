@@ -3,7 +3,6 @@ package com.example.crazyProject.controller;
 import com.example.crazyProject.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
 
 @RestController
 @RequestMapping(value="/api")
@@ -31,6 +30,6 @@ public class TestController {
     public String postHello(@RequestBody String querry){
         String result = testService.selectQuerry(querry);
         System.out.println(result);
-        return "조회성공";
+        return result;
     }
 }

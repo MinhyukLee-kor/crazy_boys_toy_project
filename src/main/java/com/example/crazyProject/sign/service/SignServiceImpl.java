@@ -19,10 +19,11 @@ public class SignServiceImpl implements SignService{
 
     /** 아이디 중복 체크*/
     @Override
-    public boolean idCheck(String userId) {
-        boolean result = false;
+    public int idCheck(String userId) {
+        int result = 1;
         HashMap<String,Object> resMap = userMapper.idCheck(userId);
-        result = resMap.get("user_id").equals("1");
+        // db기준 number은 바로 int로 캐스트가 안됨
+        result = Integer.parseInt(String.valueOf(resMap.get("chk")));
         return result;
     }
 

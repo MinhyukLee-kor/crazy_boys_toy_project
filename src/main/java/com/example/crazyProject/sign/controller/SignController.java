@@ -14,8 +14,11 @@ public class SignController {
     @Autowired
     SignService signService;
 
+    /**
+     * @author minhyuk
+     * @return int (0:가입가능,1:가입불가능)*/
     @RequestMapping(value = "idCheck", method = RequestMethod.POST)
-    public boolean idCheck(@RequestBody String userId) {
+    public int idCheck(@RequestBody String userId) {
         return signService.idCheck(userId);
     }
 }

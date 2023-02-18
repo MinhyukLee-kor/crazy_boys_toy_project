@@ -23,7 +23,9 @@ public class SignServiceImpl implements SignService{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    /** 아이디 중복 체크*/
+    /** 아이디 중복 체크
+     * @author mhlee
+     * @return int (0:가입가능, 1:가입불가능)*/
     @Override
     public int idCheck(String userId) {
         int result = 1;
@@ -33,7 +35,9 @@ public class SignServiceImpl implements SignService{
         return result;
     }
 
-    /** 회원가입 */
+    /** 회원가입
+     * @author mhlee
+     * @return int (1:성공)*/
     @Transactional
     @Override
     public int signUp(User user) {
@@ -45,14 +49,23 @@ public class SignServiceImpl implements SignService{
         return result;
     }
 
-    /** 로그인 */
+    /** 로그인
+     * @author mhlee
+     * @return int (1:성공,2:비밀번호불일치,3:아이디존재x)
+     * */
     @Override
     public int signIn(String userId, String password) {
         int result = 0;
         HashMap<String, Object> resMap = userMapper.signIn(userId);
-        String encodePw = (String)resMap.get("password");
-        if(passwordEncoder.matches(password,encodePw)){
-            result = 1;
+        if(resMap == null) { //아이디없음
+            result = 3;
+        } else {
+            String encodePw = (String) resMap.get("password");
+            if (passwordEncoder.matches(password, encodePw)) {
+                result = 1;
+            } else {
+                result = 2;
+            }
         }
         return result;
     }

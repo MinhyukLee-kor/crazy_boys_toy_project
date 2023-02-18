@@ -3,7 +3,6 @@ package com.example.crazyProject.sign.controller;
 import com.example.crazyProject.sign.domain.User;
 import com.example.crazyProject.sign.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,8 +53,10 @@ public class SignController {
         int result = signService.signIn(userId, password);
         if(result == 1) {
             return "로그인 성공";
+        } else if(result == 2){
+            return "비빌번호가 일치하지 않습니다.";
         } else {
-            return "로그인 실패";
+            return "아이디가 존재하지 않습니다.";
         }
     }
 }

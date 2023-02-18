@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 /**
  * 로그인관련
  * @author minhyuk
@@ -48,10 +50,14 @@ public class SignController {
      * @return String (페이지이동)
      * */
     @RequestMapping(value = "signIn", method = RequestMethod.POST)
-    public String signIn(@RequestBody User user) {
-        String userId = user.getUser_id();
-        String password = user.getPassword();
+    public String signIn(@RequestBody HashMap<String, Object> hMap) {
+        HashMap<String, Object> userMap = (HashMap<String,Object>)hMap.get("datas");
+        String ip = (String)hMap.get("ip");
+        String userId = (String)userMap.get("user_id");
+        String password = (String)userMap.get("password");
         int result = signService.signIn(userId, password);
+//        로그쌓기
+        signService.insertLog(userId,password,ip);
         if(result == 1) {
             return "로그인 성공";
         } else if(result == 2){

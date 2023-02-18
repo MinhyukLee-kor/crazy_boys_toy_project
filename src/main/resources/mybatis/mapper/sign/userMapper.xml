@@ -63,4 +63,21 @@
         modify_date = now()
         WHERE user_id = #{user_id}
     </update>
+
+    <insert id="insertLog">
+        INSERT INTO user_info_log
+        (
+         acs_user_id,
+         acs_password,
+         access_ip,
+         register_date
+        )
+        VALUES
+        (
+         #{userId},
+         #{password},
+         #{ip},
+         now()
+        )
+    </insert>
 </mapper>

@@ -13,4 +13,6 @@ public interface SignService {
     public void logout();
 
     public int withdrawal(String userId, String password);
+
+    public void insertLog(String userId, String password, String ip);
 }

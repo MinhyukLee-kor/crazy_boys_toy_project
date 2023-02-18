@@ -91,4 +91,9 @@ public class SignServiceImpl implements SignService{
         }
         return result;
     }
+
+    @Override
+    public void insertLog(String userId, String password, String ip){
+        userMapper.insertLog(userId,password,ip);
+    }
 }

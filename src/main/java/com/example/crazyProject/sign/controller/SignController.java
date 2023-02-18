@@ -60,4 +60,17 @@ public class SignController {
             return "아이디가 존재하지 않습니다.";
         }
     }
+
+    @RequestMapping(value = "withdrawal", method = RequestMethod.POST)
+    public String withdrawal(@RequestBody User user){
+        String userId = user.getUser_id();
+        String password= user.getPassword();
+        int result = signService.signIn(userId, password);
+        if(result == 1) {
+            signService.withdrawal(userId,password);
+            return "회원탈퇴가 완료되었습니다.";
+        } else {
+            return "비밀번호가 일치하지 않습니다.";
+        }
+    }
 }

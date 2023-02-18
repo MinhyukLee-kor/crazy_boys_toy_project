@@ -76,4 +76,19 @@ public class SignServiceImpl implements SignService{
 
     }
 
+    @Override
+    public int withdrawal(String userId, String password){
+        int result = 0;
+        HashMap<String, Object> resMap = userMapper.signIn(userId);
+        String encodePw = (String) resMap.get("password");
+        if (passwordEncoder.matches(password, encodePw)) {
+            //탈퇴성공
+            userMapper.withdrawal(userId);
+            result = 1;
+        } else {
+            //탈퇴실패
+            result = 2;
+        }
+        return result;
+    }
 }

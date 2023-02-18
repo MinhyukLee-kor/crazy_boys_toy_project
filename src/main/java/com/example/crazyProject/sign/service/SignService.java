@@ -12,4 +12,5 @@ public interface SignService {
 
     public void logout();
 
+    public int withdrawal(String userId, String password);
 }

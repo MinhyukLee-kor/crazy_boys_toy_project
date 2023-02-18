@@ -53,5 +53,14 @@
                address_detail
         FROM user_info
         WHERE user_id = #{user_id}
+        AND use_yn = true
     </select>
+
+    <update id="withdrawal">
+        UPDATE user_info SET
+        access_ip = '127.0.0.1',
+        use_yn = false,
+        modify_date = now()
+        WHERE user_id = #{user_id}
+    </update>
 </mapper>

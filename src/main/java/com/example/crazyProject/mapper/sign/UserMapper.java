@@ -16,4 +16,5 @@ public interface UserMapper {
 
     public HashMap<String, Object> signIn(String userId);
 
+    public void withdrawal(String userId);
 }

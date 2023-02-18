@@ -3,6 +3,7 @@ package com.example.crazyProject.sign.service;
 import com.example.crazyProject.mapper.sign.UserMapper;
 import com.example.crazyProject.sign.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ public class SignServiceImpl implements SignService{
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     /** 아이디 중복 체크*/
     @Override
     public int idCheck(String userId) {
@@ -34,6 +38,9 @@ public class SignServiceImpl implements SignService{
     @Override
     public int signUp(User user) {
         int result = 0;
+        String realPw = user.getPassword();
+        String encodePw = passwordEncoder.encode(realPw);
+        user.setPassword(encodePw);
         result = userMapper.signUp(user);
         return result;
     }
@@ -44,7 +51,8 @@ public class SignServiceImpl implements SignService{
         int result = 0;
         HashMap<String, Object> resMap = userMapper.signIn(userId);
         String realPw = (String)resMap.get("password");
-        if(realPw.equals(password)){
+        String encodePw = passwordEncoder.encode(realPw);
+        if(passwordEncoder.matches(password,encodePw)){
             result = 1;
         }
         return result;

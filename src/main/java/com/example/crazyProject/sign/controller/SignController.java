@@ -3,6 +3,7 @@ package com.example.crazyProject.sign.controller;
 import com.example.crazyProject.sign.domain.User;
 import com.example.crazyProject.sign.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ public class SignController {
 
     @Autowired
     SignService signService;
+
 
     /**
      * id중복확인

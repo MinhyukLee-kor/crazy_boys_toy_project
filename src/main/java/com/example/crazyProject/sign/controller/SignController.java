@@ -27,7 +27,8 @@ public class SignController {
      * @return int (0:가입가능,1:가입불가능)
      * */
     @RequestMapping(value = "idCheck", method = RequestMethod.POST)
-    public int idCheck(@RequestBody String userId) {
+    public int idCheck(@RequestBody User user) {
+        String userId = user.getUser_id();
         return signService.idCheck(userId);
     }
 

@@ -51,8 +51,8 @@ public class SignServiceImpl implements SignService{
         int result = 0;
         HashMap<String, Object> resMap = userMapper.signIn(userId);
         String realPw = (String)resMap.get("password");
-        String encodePw = passwordEncoder.encode(realPw);
-        if(passwordEncoder.matches(password,encodePw)){
+        String encodePw = passwordEncoder.encode(password);
+        if(passwordEncoder.matches(realPw,encodePw)){
             result = 1;
         }
         return result;

@@ -13,6 +13,7 @@ import java.util.HashMap;
  * @author minhyuk
  * */
 @Service
+@Transactional
 public class SignServiceImpl implements SignService{
 
     @Autowired
